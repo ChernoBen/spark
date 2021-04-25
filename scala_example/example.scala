@@ -1,0 +1,5 @@
+val textFiles = sc.textFile("hdfs://<folder contains text files")
+val words = textFiles.flatMap(line => line.split(" "))
+val wordTuples = words.map(word => (word, 1))
+val wordCounts = wordTuples.reduceByKey(_ + _)
+wordCounts.saveAsTextFile("hdfs://<outoupt folder>")
